@@ -1,13 +1,18 @@
 package com.company.factory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IceCream {
     private String flavor;
     private double salePrice;
     private int productionCost;
     private String productionTime;
-    private String ingredients;
 
-    public IceCream(String flavor, double salePrice, int productionCost, String productionTime, String ingredients) {
+
+    private List<String> ingredients = new ArrayList<>();
+
+    public IceCream(String flavor, double salePrice, int productionCost, String productionTime, List<String> ingredients) {
         this.flavor = flavor;
         this.salePrice = salePrice;
         this.productionCost = productionCost;
@@ -47,11 +52,11 @@ public class IceCream {
         this.productionTime = productionTime;
     }
 
-    public String getIngredients() {
+    public List<String> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(String ingredients) {
+    public void setIngredients(List<String> ingredients) {
         this.ingredients = ingredients;
     }
 }
