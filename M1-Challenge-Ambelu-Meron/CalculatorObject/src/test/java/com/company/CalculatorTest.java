@@ -1,14 +1,11 @@
 package com.company;
 
-
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-
-class CalculatorTest {
-
+public class CalculatorTest {
     private Calculator calculator;
     @Before
     public void setUp(){
@@ -50,6 +47,7 @@ class CalculatorTest {
         double actualOutput = calculator.add(-4.0,8.0);
         assertEquals(expectedOutput, actualOutput,0.001);
     }
+
 
 
 }
