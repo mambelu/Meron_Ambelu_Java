@@ -2,23 +2,28 @@ package com.company.factory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class IceCream {
     private String flavor;
     private double salePrice;
     private int productionCost;
     private String productionTime;
-
-
     private List<String> ingredients = new ArrayList<>();
 
-    public IceCream(String flavor, double salePrice, int productionCost, String productionTime, List<String> ingredients) {
-        this.flavor = flavor;
-        this.salePrice = salePrice;
-        this.productionCost = productionCost;
-        this.productionTime = productionTime;
-        this.ingredients = ingredients;
-    }
+
+
+    //restockIcecream will return true if the qiantity of icecream that was passed as an arguement is zero;
+  public boolean restockIcecream(com.company.pointofsale.IceCream iceCream){
+      boolean returnVal =false;
+      if(iceCream.getQuantity()==0){
+          returnVal = true;
+
+      }
+    return returnVal;
+  }
+
+
 
     public String getFlavor() {
         return flavor;
