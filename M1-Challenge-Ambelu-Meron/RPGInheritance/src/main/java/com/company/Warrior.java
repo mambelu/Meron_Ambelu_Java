@@ -17,9 +17,7 @@ public class Warrior extends Character{
 
     }
     public void attackAnotherCharacter(Character otherChar){
-        if(this.attackPower>1){
-            otherChar.strength--;
-        }
+
 
     }
 

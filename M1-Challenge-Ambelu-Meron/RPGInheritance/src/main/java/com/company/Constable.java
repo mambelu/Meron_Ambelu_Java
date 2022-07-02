@@ -8,13 +8,7 @@ private int jurisdiction;
     {
         super(name,strength,health,stamina,speed,attackPower,running,arrested);
         this.jurisdiction = jurisdiction;
-        this.strength=60;
-        this.health=100;
-        this.stamina=60;
-        this.speed=20;
-        this.attackPower=5;
-        this.running=false;
-        this.arrested = false;
+
 
 
     }
@@ -22,11 +16,12 @@ private int jurisdiction;
     public void attackAnotherCharacter(Character otherChar){
         if(this.attackPower>1){
         otherChar.strength--;
-        } 
+        }
 
     }
     public void arrestAnotherCharacter(Character otherChar){
         this.jurisdiction++;
+        otherChar.setArrested(true);
 
 }
 
