@@ -5,26 +5,14 @@ public  abstract class Character {
     protected String name;
 
     protected int strength;
-    protected int health=100;
-    protected int stamina=75;
-    protected int speed=10;
-    protected int attackPower=1;
-    protected boolean running=false;
-    protected boolean arrested = false;
+    protected int health;
+    protected int stamina;
+    protected int speed;
+    protected int attackPower;
+    protected boolean running;
+    protected boolean arrested;
 
     public abstract void attackAnotherCharacter(Character otherChar);
-
-
-    public Character(String name, int strength, int health, int stamina, int speed, int attackPower, boolean running, boolean arrested) {
-        this.name = name;
-        this.strength = strength;
-        this.health = health;
-        this.stamina = stamina;
-        this.speed = speed;
-        this.attackPower = attackPower;
-        this.running = running;
-        this.arrested = arrested;
-    }
 
     public String getName() {
         return name;
@@ -66,11 +54,11 @@ public  abstract class Character {
         this.speed = speed;
     }
 
-    public int getAttackPower() {
+    public int getAttackPower1() {
         return attackPower;
     }
 
-    public void setAttackPower(int attackPower) {
+    public void setAttackPower1(int attackPower) {
         this.attackPower = attackPower;
     }
 
@@ -88,5 +76,19 @@ public  abstract class Character {
 
     public void setArrested(boolean arrested) {
         this.arrested = arrested;
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "name='" + name + '\'' +
+                ", strength=" + strength +
+                ", health=" + health +
+                ", stamina=" + stamina +
+                ", speed=" + speed +
+                ", attackPower=" + attackPower +
+                ", running=" + running +
+                ", arrested=" + arrested +
+                '}';
     }
 }

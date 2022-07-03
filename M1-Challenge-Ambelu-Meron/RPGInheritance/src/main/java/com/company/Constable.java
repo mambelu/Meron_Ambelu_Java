@@ -1,35 +1,52 @@
 package com.company;
 
 public class Constable extends Character{
-private int jurisdiction;
+private boolean jurisdiction;
 
-    public Constable(int jurisdiction,String name,int strength,int health,int stamina,
-                     int speed,int attackPower, int shieldStrength,boolean running,boolean arrested)
-    {
-        super(name,strength,health,stamina,speed,attackPower,running,arrested);
-        this.jurisdiction = jurisdiction;
-
-
-
-    }
-
-    public void attackAnotherCharacter(Character otherChar){
-        if(this.attackPower>1){
-        otherChar.strength--;
-        }
+    public Constable(){
+        this.strength=60;
+        this.health=100;
+        this.stamina=60;
+        this.speed=20;
+        this.attackPower=5;
+        this.running=false;
+        this.arrested=false;
 
     }
-    public void arrestAnotherCharacter(Character otherChar){
-        this.jurisdiction++;
-        otherChar.setArrested(true);
 
-}
-
-    public int getJurisdiction() {
+    public boolean getJurisdiction() {
         return jurisdiction;
     }
 
-    public void setJurisdiction(int jurisdiction) {
+    public void setJurisdiction(boolean jurisdiction) {
         this.jurisdiction = jurisdiction;
+    }
+
+    public void attackAnotherCharacter(Character otherChar){
+//        if(this.attackPower>1){
+//       // otherChar.strength--;
+//        otherChar.health--;//stamina might go down
+//        }
+
+    }
+    public void arrestAnotherCharacter(Character otherChar){
+//        this.jurisdiction++;
+//        otherChar.setArrested(true);true   game over
+
+}
+
+    @Override
+    public String toString() {
+        return "Constable{" +
+                "jurisdiction=" + jurisdiction +
+                ", name='" + name + '\'' +
+                ", strength=" + strength +
+                ", health=" + health +
+                ", stamina=" + stamina +
+                ", speed=" + speed +
+                ", attackPower=" + attackPower +
+                ", running=" + running +
+                ", arrested=" + arrested +
+                '}';
     }
 }

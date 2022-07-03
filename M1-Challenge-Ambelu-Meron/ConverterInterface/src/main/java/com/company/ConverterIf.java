@@ -3,7 +3,7 @@ package com.company;
 public class ConverterIf implements Converter {
     public String convertMonth(int monthNumber) {
         String month ="month";
-        if (monthNumber >= 1 || monthNumber <= 12) {
+        if (monthNumber >= 1 && monthNumber <= 12) {
             if (monthNumber == 1) {
                 month="January";
             } else if (monthNumber == 2) {
@@ -32,7 +32,7 @@ public class ConverterIf implements Converter {
                 month="December";
             }
         } else {
-            System.out.println( "Error, the value is not between 1 and 12");
+            System.out.println( "Error, the value  is not from 1 to 12");
         }
         return month;
     }
