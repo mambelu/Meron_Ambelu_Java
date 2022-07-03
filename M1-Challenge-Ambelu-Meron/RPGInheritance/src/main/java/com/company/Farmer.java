@@ -17,7 +17,13 @@ private boolean harvesting;
     }
     public void attackAnotherCharacter(Character otherChar){
 
+        if(this.attackPower>1) {
             otherChar.strength--;
+            otherChar.health--;
+            this.attackPower--;
+        }else {
+            System.out.println( this.name + "has no enough power to attack");
+        }
 
 
     }

@@ -23,15 +23,21 @@ private boolean jurisdiction;
     }
 
     public void attackAnotherCharacter(Character otherChar){
-//        if(this.attackPower>1){
-//       // otherChar.strength--;
-//        otherChar.health--;//stamina might go down
-//        }
+        if(this.attackPower>1) {
+            otherChar.strength--;
+            otherChar.health--;
+            this.attackPower--;
+        }else {
+            System.out.println( this.name + "has no enough power to attack");
+        }
+
 
     }
     public void arrestAnotherCharacter(Character otherChar){
-//        this.jurisdiction++;
-//        otherChar.setArrested(true);true   game over
+ if((this.jurisdiction == true)&&( otherChar.running ==false)){
+     System.out.println(this.getName() + " can arrest "+ otherChar.getName());
+ }
+
 
 }
 
