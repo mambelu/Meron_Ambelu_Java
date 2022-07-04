@@ -12,10 +12,20 @@ public class Calculator {
         return a * b;
     }
     public int divide(int a, int b) {
-        return a / b;
+
+        int returnval = 0;
+
+        if(b != 0) {
+            returnval = a / b;
+        }
+        else{
+            System.out.println(" a number can not be divided by zero");
+        }
+
+        return returnval;
     }
 
-    //Below is a set of methods for add, subtract , multiply and divide
+    //Below is a set of methods for add, subtract , multiply and divide two doubles
 
     public double add(double a, double b) {
         return a + b;
@@ -34,7 +44,18 @@ public class Calculator {
 
 
     public double divide(double a, double b) {
-        return a / b;
+
+
+        double returnval = 0.0;
+
+        if(b != 0) {
+            returnval = a / b;
+        }
+        else{
+            System.out.println(" a number can not be divided by zero");
+        }
+
+        return returnval;
     }
 
 
@@ -81,7 +102,12 @@ public class Calculator {
 
         System.out.print(10.8+"/"+2.2+"=");
 
-        System.out.println( calcObject.divide(10.8,2.2));
+        System.out.print(calcObject.divide(10.8,2.2));
+
+
+
+
+
 
 
     }

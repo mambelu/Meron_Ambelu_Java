@@ -5,11 +5,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ConverterIfTest {
-    ConverterIf converter;
+public class ConverterSwitchTest {
+
+    ConverterSwitch converter;
     @Before
     public void setUp(){
-        converter = new ConverterIf();
+        converter = new ConverterSwitch();
     }
 
     @Test
@@ -33,5 +34,6 @@ public class ConverterIfTest {
 
 
     }
+
 
 }

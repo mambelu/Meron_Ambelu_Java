@@ -12,41 +12,67 @@ public class CalculatorTest {
         calculator = new Calculator();
     }
     @Test
-    public void shouldAddTwoPositiveIntegers(){
-        int expectedOutput = 5;
-        int actualOutput = calculator.add(3,2);
-        assertEquals(expectedOutput, actualOutput);
+    public void shouldAddTwoInts(){
+
+        assertEquals(4,calculator.add(2,2));
+        assertEquals(-5,calculator.add(-10,5));
+        assertEquals(-4,calculator.add(-2,-2));
     }
     @Test
-    public void shouldAddTwoNegativeIntegers(){
-        int expectedOutput = -13;
-        int actualOutput = calculator.add(-3,-10);
-        assertEquals(expectedOutput, actualOutput);
+    public void shouldAddTwoDoubles(){
+
+        assertEquals(4.5,calculator.add(2.5,2),0.001);
+        assertEquals(-5.5,calculator.add(-10.5,5),0.001);
+        assertEquals(-4.8,calculator.add(-2.5,-2.3),0.001);
     }
     @Test
-    public void shouldAddNegativeAndPositiveIntegers(){
-        int expectedOutput = 4;
-        int actualOutput = calculator.add(-4,8);
-        assertEquals(expectedOutput, actualOutput);
+    public void shouldReturnDifferenceOfTwoInts(){
+
+        assertEquals(0,calculator.subtract(2,2));
+        assertEquals(-15,calculator.subtract(-10,5));
+        assertEquals(0,calculator.subtract(-2,-2));
     }
     @Test
-    public void shouldAddTwoPositiveDoubles(){
-        double expectedOutput = 5.0;
-        double actualOutput = calculator.add(3.0,2.0);
-        assertEquals(expectedOutput, actualOutput,0.001);
+    public void shouldReturnDifferenceOfTwoDoubles(){
+
+        assertEquals(0.5,calculator.subtract(2.5,2),0.001);
+        assertEquals(-15.5,calculator.subtract(-10.5,5),0.001);
+        assertEquals(-0.2,calculator.subtract(-2.5,-2.3),0.001);
+    }
+
+    @Test
+    public void shouldMultiplyTwoInts(){
+
+        assertEquals(16,calculator.multiply(8,2));
+        assertEquals(-50,calculator.multiply(-10,5));
+        assertEquals(4,calculator.multiply(-2,-2));
     }
     @Test
-    public void shouldAddTwoNegativeDoubles(){
-        double expectedOutput = -13.0;
-        double actualOutput = calculator.add(-3.0,-10.0);
-        assertEquals(expectedOutput, actualOutput,0.001);
+    public void shouldMultiplyTwoDoubles(){
+
+        assertEquals(5.0,calculator.multiply(2.5,2),0.001);
+        assertEquals(-105.0,calculator.multiply(-10.5,10),0.001);
+        assertEquals(4.0,calculator.multiply(-2.0,-2.0),0.001);
+    }
+
+    @Test
+    public void shouldDivideTwoInts(){
+
+        assertEquals(4,calculator.divide(8,2));
+        assertEquals(-2,calculator.divide(-10,5));
+        assertEquals(1,calculator.divide(-2,-2));
     }
     @Test
-    public void shouldAddNegativeAndPositiveDoubles(){
-        double expectedOutput = 4.0;
-        double actualOutput = calculator.add(-4.0,8.0);
-        assertEquals(expectedOutput, actualOutput,0.001);
+    public void shoulDivideTwoDoubles(){
+
+        assertEquals(2.5,calculator.divide(5.0,2.0),0.001);
+        assertEquals(-1.05,calculator.divide(-10.5,10),0.001);
+        assertEquals(1.0,calculator.divide(-2.0,-2.0),0.001);
     }
+
+
+
+
 
 
 

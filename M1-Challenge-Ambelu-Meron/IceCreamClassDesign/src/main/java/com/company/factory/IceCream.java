@@ -7,14 +7,18 @@ import java.util.Map;
 public class IceCream {
     private String flavor;
     private double salePrice;
-    private int productionCost;
+    private double productionCost;
     private String productionTime;
+
     private List<String> ingredients = new ArrayList<>();
 
+    public void setProductionCost(double productionCost) {
+        this.productionCost = productionCost;
+    }
 
 
-    //restockIcecream will return true if the qiantity of icecream that was passed as an arguement is zero;
-  public boolean restockIcecream(com.company.pointofsale.IceCream iceCream){
+//********************************************//*************************************
+    public boolean restockIcecream(com.company.pointofsale.IceCream iceCream){
       boolean returnVal =false;
       if(iceCream.getQuantity()==0){
           returnVal = true;
@@ -23,6 +27,27 @@ public class IceCream {
     return returnVal;
   }
 
+
+
+  //*****************************************//*********************************************
+  public double calculateProfit(){
+      double profit = this.salePrice- this.productionCost;
+      return profit;
+
+  }
+
+
+  //********************************************//*************************************
+  public boolean isallergyCaution(){
+        boolean returnVal = false;
+        for( int i = 0 ; i< ingredients.size(); i++){
+            if (ingredients.get(i)=="peanut"){
+                returnVal = true;
+
+            }
+        }
+         return returnVal;
+  }
 
 
     public String getFlavor() {
@@ -41,7 +66,7 @@ public class IceCream {
         this.salePrice = salePrice;
     }
 
-    public int getProductionCost() {
+    public double getProductionCost() {
         return productionCost;
     }
 
