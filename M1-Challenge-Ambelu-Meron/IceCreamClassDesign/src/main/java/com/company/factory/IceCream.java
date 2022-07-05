@@ -12,12 +12,8 @@ public class IceCream {
 
     private List<String> ingredients = new ArrayList<>();
 
-    public void setProductionCost(double productionCost) {
-        this.productionCost = productionCost;
-    }
 
 
-//********************************************//*************************************
     public boolean restockIcecream(com.company.pointofsale.IceCream iceCream){
       boolean returnVal =false;
       if(iceCream.getQuantity()==0){
@@ -28,16 +24,12 @@ public class IceCream {
   }
 
 
-
-  //*****************************************//*********************************************
   public double calculateProfit(){
       double profit = this.salePrice- this.productionCost;
       return profit;
 
   }
 
-
-  //********************************************//*************************************
   public boolean isallergyCaution(){
         boolean returnVal = false;
         for( int i = 0 ; i< ingredients.size(); i++){
@@ -69,10 +61,11 @@ public class IceCream {
     public double getProductionCost() {
         return productionCost;
     }
-
-    public void setProductionCost(int productionCost) {
+    public void setProductionCost(double productionCost) {
         this.productionCost = productionCost;
     }
+
+
 
     public String getProductionTime() {
         return productionTime;

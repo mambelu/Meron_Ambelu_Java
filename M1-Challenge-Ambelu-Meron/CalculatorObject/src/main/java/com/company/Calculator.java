@@ -64,43 +64,43 @@ public class Calculator {
     public static void main(String[] args) {
         Calculator calcObject = new Calculator();
 
-        System.out.print(2+"+"+2+"=");
+        System.out.print(2+"+"+2+" = ");
 
         System.out.println(calcObject.add(2,2));
 
-        System.out.print(1+"+"+1+"=");
+        System.out.print(1+" + "+1+" = ");
 
         System.out.println(calcObject.add(1,1));
 
-        System.out.print(23+"-"+52+"=");
+        System.out.print(23+" - "+52+" = ");
 
         System.out.println(calcObject.subtract(23,52));
 
-        System.out.print(34+"*"+2+"=");
+        System.out.print(34+" * "+2+" = ");
 
         System.out.println( calcObject.multiply(34,2));
 
-        System.out.print(12+"/"+3+"=");
+        System.out.print(12+" / "+3+" = ");
 
         System.out.println( calcObject.divide(12,3));
 
-        System.out.print(12.0+"/"+7.0+"=");
+        System.out.print(12.0+" / "+7.0+" =" );
 
         System.out.println( calcObject.divide(12.0,7.0));
 
-        System.out.print(3.4+"+"+2.3+"=");
+        System.out.print(3.4+" + "+2.3+" = ");
 
         System.out.println(calcObject.add(3.4,2.3));
 
-        System.out.print(6.7+"*"+4.4+"=");
+        System.out.print(6.7+" * "+4.4+" = ");
 
         System.out.println( calcObject.multiply(6.7,4.4));
 
-        System.out.print(5.5+"-"+0.5+"=");
+        System.out.print(5.5+" - "+0.5+" = ");
 
         System.out.println(calcObject.subtract(5.5,0.5));
 
-        System.out.print(10.8+"/"+2.2+"=");
+        System.out.print(10.8+" / "+2.2+" = ");
 
         System.out.print(calcObject.divide(10.8,2.2));
 
