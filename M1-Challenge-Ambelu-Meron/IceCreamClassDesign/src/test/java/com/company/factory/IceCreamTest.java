@@ -17,7 +17,7 @@ public class IceCreamTest {
     public void setUp(){myIcecream = new com.company.factory.IceCream();
     }
     @Test
-    public void testsIfZeroquantityOfIcecreamWillreturnTrueToRestock(){
+    public void ShouldReturnTrueForIcecreamAtSalePointQantityZero(){
         //Arrange
 
         IceCream pointOfSaleIcecream = new IceCream();
@@ -44,6 +44,18 @@ public class IceCreamTest {
         //Assert
         assertEquals(expectedOutPut,actualOutput);
 
+    }
+    @Test
+    public void shouldReturnProfit(){
+        myIcecream.setProductionCost(1.0); //per ice cream
+        myIcecream.setSalePrice(3.0); // per ice cream
+
+        double expectedOutput = 2.0;
+
+        double actualOutput = myIcecream.calculateProfit();
+
+        //Assert
+        assertEquals(expectedOutput,actualOutput, 0.0001);
     }
 
 

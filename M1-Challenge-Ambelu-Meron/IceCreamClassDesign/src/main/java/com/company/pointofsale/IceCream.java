@@ -9,18 +9,23 @@ public class IceCream {
     private int quantitySold;
     private double tax = 0.23;
 
-//********************************//***********************************
+    private String topping;
+
+
+    private int noOfScoop;
+
+//**********************Calculates total price***********************************
     public double calculatetotalPrice(List<IceCream> iceCreamList){
         double totalPrice = 0.0;
         for(int i=0; i<iceCreamList.size(); i++) {
 
-            totalPrice += (iceCreamList.get(i).getPrice()* iceCreamList.get(i).getQuantity())+((iceCreamList.get(i).getPrice()* iceCreamList.get(i).getQuantity())*tax);
+            totalPrice += (iceCreamList.get(i).getPrice()* iceCreamList.get(i).getQuantity()*iceCreamList.get(i).getNoOfScoop())+((iceCreamList.get(i).getPrice()* iceCreamList.get(i).getQuantity()*iceCreamList.get(i).getNoOfScoop())*tax);
 
         }
         return totalPrice;
     }
 
-    //*****************************//**********************************
+    //**********************Compares the quantity sold property of List of ice cream and gets the high demand flavor*********************************
     public void highDemandFlavor(List<IceCream> mylist){
 
         double max = 0;
@@ -35,8 +40,11 @@ public class IceCream {
         }
     }
 
-    //***********************************//***************************
 
+    //*****************************The addTopping method will add 1 to the price **//***************************
+    public void addTopping(){
+       this.price+=1;
+    }
 
     public String getFlavor() {
         return flavor;
@@ -69,32 +77,19 @@ public class IceCream {
     public void setQuantitySold(int quantitySold) {
         this.quantitySold = quantitySold;
     }
-
-    public static void main(String[] args) {
-        IceCream icecream = new IceCream();
-        icecream.setPrice(2.0);
-        icecream.setQuantity(2);
-        icecream.setFlavor("Vanilla");
-
-
-        IceCream icecream1 = new IceCream();
-        icecream1.setPrice(2.0);
-        icecream1.setPrice(2);
-        icecream1.setFlavor("chocolate");
-
-        List<IceCream> list1 = new ArrayList<>();
-        list1.add(icecream);
-        list1.add(icecream1);
-
-
-        System.out.println(icecream.calculatetotalPrice(list1));
-
-
-
-
-
-
+    public int getNoOfScoop() {
+        return noOfScoop;
     }
 
+    public void setNoOfScoop(int noOfScoop) {
+        this.noOfScoop = noOfScoop;
+    }
 
+    public String getTopping() {
+        return topping;
+    }
+
+    public void setTopping(String topping) {
+        this.topping = topping;
+    }
 }
