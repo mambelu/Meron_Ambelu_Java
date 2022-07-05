@@ -17,7 +17,7 @@ private boolean harvesting;
     }
     public void attackAnotherCharacter(Character otherChar){
 
-        if(this.attackPower>1) {
+        if(this.attackPower>0) {
             otherChar.strength--;
             otherChar.health--;
             this.attackPower--;
@@ -44,6 +44,9 @@ private boolean harvesting;
         this.harvesting = harvesting;
     }
 
+
+
+
     @Override
     public String toString() {
         return "Farmer{" +
@@ -59,4 +62,6 @@ private boolean harvesting;
                 ", arrested=" + arrested +
                 '}';
     }
+
+
 }

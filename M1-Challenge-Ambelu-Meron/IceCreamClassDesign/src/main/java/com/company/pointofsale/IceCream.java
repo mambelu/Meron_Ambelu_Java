@@ -14,7 +14,7 @@ public class IceCream {
         double totalPrice = 0.0;
         for(int i=0; i<iceCreamList.size(); i++) {
 
-            totalPrice += totalPrice + (iceCreamList.get(i).getPrice()* iceCreamList.get(i).getQuantity())+((iceCreamList.get(i).getPrice()* iceCreamList.get(i).getQuantity())*tax);
+            totalPrice += (iceCreamList.get(i).getPrice()* iceCreamList.get(i).getQuantity())+((iceCreamList.get(i).getPrice()* iceCreamList.get(i).getQuantity())*tax);
 
         }
         return totalPrice;
@@ -30,7 +30,7 @@ public class IceCream {
             if  (mylist.get(i).getQuantitySold()> max){
                 max=mylist.get(i).getQuantitySold();
 
-                System.out.println(mylist.get(i).flavor + " is high demand icecream.");
+                System.out.println(mylist.get(i).getFlavor() + " is high demand icecream.");
             }
         }
     }

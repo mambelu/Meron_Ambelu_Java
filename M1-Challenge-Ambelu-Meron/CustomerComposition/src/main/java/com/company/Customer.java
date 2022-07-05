@@ -7,12 +7,15 @@ public class Customer {
     private Address shippingAddress;
     private Address billingAddress;
 
-    public Customer(String name, String lastName, Contact contact, Address shippingAddress, Address billingAddress) {
+    private boolean isRewardMember;
+
+    public Customer(String name, String lastName, Contact contact, Address shippingAddress, Address billingAddress, boolean isRewardMember) {
         this.name = name;
         this.lastName = lastName;
         this.contact = contact;
         this.shippingAddress = shippingAddress;
         this.billingAddress = billingAddress;
+        this.isRewardMember = isRewardMember;
     }
 
     public String getName() {
@@ -53,5 +56,26 @@ public class Customer {
 
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
+
+    }
+    public boolean isRewardMember() {
+        return isRewardMember;
+    }
+
+    public void setRewardMember(boolean rewardMember) {
+        isRewardMember = rewardMember;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", contact=" + contact +
+                ", shippingAddress=" + shippingAddress +
+                ", billingAddress=" + billingAddress +
+                ", isRewardMember=" + isRewardMember +
+                '}';
     }
 }
+
