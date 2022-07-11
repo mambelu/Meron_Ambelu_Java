@@ -34,7 +34,8 @@ private boolean jurisdiction;
 
     }
     public void arrestAnotherCharacter(Character otherChar){
- if((this.jurisdiction == true)&&( otherChar.running ==false)){
+
+    if((this.jurisdiction == true)&&( otherChar.running ==true)){
      System.out.println(this.getName() + " can arrest "+ otherChar.getName());
  }
 
