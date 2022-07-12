@@ -39,20 +39,22 @@ public class mathControllerTest {
 
         // ARRANGE
         // ARRANGE
-        MathSolution inputBody = new MathSolution();
-        inputBody.setOperand1("10");
-        inputBody.setOperand2("7");
+        MathSolution inputBody = new MathSolution("10","7");
+        inputBody.setOperation("add");
+        inputBody.setAnswer(17);
+
+
 
         // Convert Java Object to JSON.
         String inputJson = mapper.writeValueAsString(inputBody);
 
-        MathSolution outPutBody = new MathSolution();
-        outPutBody.setOperand1("10");
-        outPutBody.setOperand2("7");
-        outPutBody.setOperation("add");
-        outPutBody.setAnswer(17);
+        MathSolution outputBody = new MathSolution();
+        outputBody.setOperand1("10");
+        outputBody.setOperand2("7");
+        outputBody.setOperation("add");
+        outputBody.setAnswer(17);
 
-        String outputJson = mapper.writeValueAsString(outPutBody);
+        String outputJson = mapper.writeValueAsString(outputBody);
 
         // ACT
         mockMvc.perform(
@@ -63,6 +65,7 @@ public class mathControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(content().json(outputJson));
+
     }
 
     @Test
@@ -138,6 +141,130 @@ public class mathControllerTest {
                 .andDo(print())                                           // Print results to console.
                 .andExpect(status().isUnprocessableEntity());             // ASSERT (status code is 422)
     }
+
+
+    @Test
+    public void shouldReturnProductOfTwoOperands() throws Exception {
+
+        // ARRANGE
+        // ARRANGE
+        MathSolution inputBody = new MathSolution();
+        inputBody.setOperand1("10");
+        inputBody.setOperand2("7");
+
+        // Convert Java Object to JSON.
+        String inputJson = mapper.writeValueAsString(inputBody);
+
+        MathSolution outPutBody = new MathSolution();
+        outPutBody.setOperand1("10");
+        outPutBody.setOperand2("7");
+        outPutBody.setOperation("multiply");
+        outPutBody.setAnswer(70);
+
+        String outputJson = mapper.writeValueAsString(outPutBody);
+
+        // ACT
+        mockMvc.perform(
+                        post("/multiply")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(content().json(outputJson));
+    }
+
+    @Test
+    public void shouldReturn422StatusCodeWithInvalidOperandsToMultiply() throws Exception {
+        // ARRANGE
+        MathSolution inputBody = new MathSolution();
+        inputBody.setOperand1("invalid string");
+        inputBody.setOperand2("7");
+
+        // Convert Java Object to JSON.
+        String inputJson = mapper.writeValueAsString(inputBody);
+
+        // ACT
+        mockMvc.perform(
+                        post("/multiply")                                // Perform the POST request.
+                                .content(inputJson)                               // Set the request body.
+                                .contentType(MediaType.APPLICATION_JSON)          // Tell the server it's in JSON format.
+                )
+                .andDo(print())                                           // Print results to console.
+                .andExpect(status().isUnprocessableEntity());             // ASSERT (status code is 422)
+    }
+
+
+    @Test
+    public void shouldReturnQuotientOfTwoOperands() throws Exception {
+
+        // ARRANGE
+        // ARRANGE
+        MathSolution inputBody = new MathSolution();
+        inputBody.setOperand1("10");
+        inputBody.setOperand2("2");
+
+        // Convert Java Object to JSON.
+        String inputJson = mapper.writeValueAsString(inputBody);
+
+        MathSolution outPutBody = new MathSolution();
+        outPutBody.setOperand1("10");
+        outPutBody.setOperand2("2");
+        outPutBody.setOperation("divide");
+        outPutBody.setAnswer(5);
+
+        String outputJson = mapper.writeValueAsString(outPutBody);
+
+        // ACT
+        mockMvc.perform(
+                        post("/divide")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isCreated())
+                .andExpect(content().json(outputJson));
+    }
+
+    @Test
+    public void shouldReturn422StatusCodeWithInvalidOperandsToDivide() throws Exception {
+        // ARRANGE
+        MathSolution inputBody = new MathSolution();
+        inputBody.setOperand1("invalid string");
+        inputBody.setOperand2("7");
+
+        // Convert Java Object to JSON.
+        String inputJson = mapper.writeValueAsString(inputBody);
+
+        // ACT
+        mockMvc.perform(
+                        post("/divide")                                // Perform the POST request.
+                                .content(inputJson)                               // Set the request body.
+                                .contentType(MediaType.APPLICATION_JSON)          // Tell the server it's in JSON format.
+                )
+                .andDo(print())                                           // Print results to console.
+                .andExpect(status().isUnprocessableEntity());             // ASSERT (status code is 422)
+    }
+
+    @Test
+    public void shouldReturn422ErrorIfOperand2IsZero() throws Exception {
+        // ARRANGE
+        MathSolution inputBody = new MathSolution("2", "0");
+
+        // Convert Java Object to JSON.
+        String inputJson = mapper.writeValueAsString(inputBody);
+
+        // ACT
+        mockMvc.perform(
+                        post("/divide")                                    // Perform the POST request.
+                                .content(inputJson)                               // Set the request body.
+                                .contentType(MediaType.APPLICATION_JSON)          // Tell the server it's in JSON format.
+                )
+                .andDo(print())                                                     // Print results to console.
+                .andExpect(status().isUnprocessableEntity());
+
+    }
+
 
 
 }
