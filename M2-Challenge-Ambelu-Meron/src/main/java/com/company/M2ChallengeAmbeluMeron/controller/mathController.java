@@ -5,12 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 public class mathController {
 
     @RequestMapping(value = "/add", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public MathSolution addTwoOperands(@RequestBody MathSolution operands){
+    public MathSolution addTwoOperands(@RequestBody @Valid  MathSolution operands){
         MathSolution returnVal = new MathSolution();
         returnVal.setOperand1(operands.getOperand1());
         returnVal.setOperand2(operands.getOperand2());
@@ -25,7 +27,7 @@ public class mathController {
 
     @RequestMapping(value = "/subtract", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public MathSolution subtractTwoOperands(@RequestBody MathSolution operands){
+    public MathSolution subtractTwoOperands(@RequestBody @Valid MathSolution operands){
         MathSolution returnVal = new MathSolution();
         returnVal.setOperand1(operands.getOperand1());
         returnVal.setOperand2(operands.getOperand2());
@@ -37,7 +39,7 @@ public class mathController {
 
     @RequestMapping(value = "/multiply", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public MathSolution multiplyTwoOperands(@RequestBody MathSolution operands){
+    public MathSolution multiplyTwoOperands(@RequestBody @Valid MathSolution operands){
         MathSolution returnVal = new MathSolution();
         returnVal.setOperand1(operands.getOperand1());
         returnVal.setOperand2(operands.getOperand2());
@@ -50,7 +52,7 @@ public class mathController {
 
     @RequestMapping(value = "/divide", method= RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public MathSolution divideTwoOperands(@RequestBody MathSolution operands){
+    public MathSolution divideTwoOperands(@RequestBody @Valid MathSolution operands){
         MathSolution returnVal = new MathSolution();
         returnVal.setOperand1(operands.getOperand1());
         returnVal.setOperand2(operands.getOperand2());

@@ -1,12 +1,19 @@
 package com.company.M2ChallengeAmbeluMeron.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class MathSolution {
 
+
+    @NotEmpty(message="operand1 can not be empty")
+
     private String operand1;
+
+    @NotEmpty(message="operand1 can not be empty")
     private String operand2;
     private String operation;
     private int answer;

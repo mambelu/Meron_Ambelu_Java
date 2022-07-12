@@ -84,6 +84,26 @@ public class mathControllerTest {
     }
 
 
+    @Test
+    public void shouldReturn422ErrorIfEmptyStringIsPassedToAnyOfTheOperandsToAdd() throws Exception {
+        // ARRANGE
+        MathSolution inputBody = new MathSolution("2", "");
+
+        // Convert Java Object to JSON.
+        String inputJson = mapper.writeValueAsString(inputBody);
+
+        // ACT
+        mockMvc.perform(
+                        post("/add")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+
+    }
+
+
 
     // MockMVC test for successful response the "/subtract" end point
     @Test
@@ -135,6 +155,25 @@ public class mathControllerTest {
                 .andExpect(status().isUnprocessableEntity());
     }
 
+    @Test
+    public void shouldReturn422ErrorIfEmptyStringIsPassedToAnyOfTheOperandsToSubtract() throws Exception {
+        // ARRANGE
+        MathSolution inputBody = new MathSolution("2", "");
+
+        // Convert Java Object to JSON.
+        String inputJson = mapper.writeValueAsString(inputBody);
+
+        // ACT
+        mockMvc.perform(
+                        post("/subtract")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+
+    }
+
 
     @Test
     public void shouldReturnProductOfTwoOperands() throws Exception {
@@ -183,6 +222,25 @@ public class mathControllerTest {
                 )
                 .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void shouldReturn422ErrorIfEmptyStringIsPassedToAnyOfTheOperandsToMultiply() throws Exception {
+        // ARRANGE
+        MathSolution inputBody = new MathSolution("2", "");
+
+        // Convert Java Object to JSON.
+        String inputJson = mapper.writeValueAsString(inputBody);
+
+        // ACT
+        mockMvc.perform(
+                        post("/multiply")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+
     }
 
 
@@ -253,6 +311,29 @@ public class mathControllerTest {
                 .andExpect(status().isUnprocessableEntity());
 
     }
+
+
+    @Test
+    public void shouldReturn422ErrorIfEmptyStringIsPassedToAnyOfTheOperandsToDivide() throws Exception {
+        // ARRANGE
+        MathSolution inputBody = new MathSolution("2", "");
+
+        // Convert Java Object to JSON.
+        String inputJson = mapper.writeValueAsString(inputBody);
+
+        // ACT
+        mockMvc.perform(
+                        post("/divide")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
+
+    }
+
+
+
 
 
 
