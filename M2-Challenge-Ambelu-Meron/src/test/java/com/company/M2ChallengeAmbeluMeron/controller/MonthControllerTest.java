@@ -41,7 +41,7 @@ public class MonthControllerTest {
         //Arrange
         //Act
         mocMvc.perform(
-                get("/month/14"))
+                get("/month/13"))
                         .andDo(print())
                         .andExpect(status().isUnprocessableEntity());
 
@@ -49,47 +49,6 @@ public class MonthControllerTest {
     }
 
     //Random month end point mock mvc test
-
-//    @Test
-//    public void shouldReturnRandomMontWhenProvidedRandomNumber() throws Exception{
-//        //Arrange
-//        Random monthNumber = new Random();
-//        int randomMonth = monthNumber.nextInt(13) + 1;
-//        Month month = new Month();
-//        month.setNumber(randomMonth);
-//        if(randomMonth == 1){
-//            month.setName("January");
-//        }else if(randomMonth == 2){
-//            month.setName("February");
-//        }else if(randomMonth == 3){
-//            month.setName("March");
-//        }else if(randomMonth == 4){
-//            month.setName("April");
-//        }else if(randomMonth == 5){
-//            month.setName("May");
-//        }else if(randomMonth == 6){
-//            month.setName("June");
-//        }else if(randomMonth == 7){
-//            month.setName("July");
-//        }else if(randomMonth == 8){
-//            month.setName("August");
-//        }else if(randomMonth == 9){
-//            month.setName("September");
-//        }else if(randomMonth == 10){
-//            month.setName("October");
-//        }else if(randomMonth == 11){
-//            month.setName("November");
-//        }else month.setName("December");
-//
-//        String expectedJson = mapper.writeValueAsString(month);
-//        mocMvc.perform(
-//                        get("/randomMonth"))
-//                .andDo(print())
-//                .andExpect(status().isOk())
-//                .andExpect(content().json(expectedJson));
-//    }
-
-
 
     @Test
     public void shouldReturnNonEmptyValue() throws Exception {
@@ -106,7 +65,7 @@ public class MonthControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.number").isNotEmpty())
-                .andExpect(jsonPath("$.month").isNotEmpty());
+                .andExpect(jsonPath("$.name").isNotEmpty());
     }
 
 }

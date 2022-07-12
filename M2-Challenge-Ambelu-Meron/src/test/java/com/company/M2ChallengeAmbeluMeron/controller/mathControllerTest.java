@@ -24,7 +24,6 @@ public class mathControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    // ObjectMapper used to convert Java objects to JSON and vice versa
     private ObjectMapper mapper = new ObjectMapper();
 
     @Before
@@ -33,15 +32,15 @@ public class mathControllerTest {
     }
 
 
-    // MockMVC test for successful response the add end point
+
     @Test
     public void shouldReturnSumOfTwoOperands() throws Exception {
 
-        // ARRANGE
+
         // ARRANGE
         MathSolution inputBody = new MathSolution("10","7");
 
-        // Convert Java Object to JSON.
+
         String inputJson = mapper.writeValueAsString(inputBody);
 
         MathSolution outputBody = new MathSolution();
@@ -76,12 +75,12 @@ public class mathControllerTest {
 
         // ACT
         mockMvc.perform(
-                        post("/add")                                // Perform the POST request.
-                                .content(inputJson)                               // Set the request body.
-                                .contentType(MediaType.APPLICATION_JSON)          // Tell the server it's in JSON format.
+                        post("/add")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andDo(print())                                           // Print results to console.
-                .andExpect(status().isUnprocessableEntity());             // ASSERT (status code is 422)
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
     }
 
 
@@ -128,12 +127,12 @@ public class mathControllerTest {
 
         // ACT
         mockMvc.perform(
-                        post("/subtract")                                // Perform the POST request.
-                                .content(inputJson)                               // Set the request body.
-                                .contentType(MediaType.APPLICATION_JSON)          // Tell the server it's in JSON format.
+                        post("/subtract")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andDo(print())                                           // Print results to console.
-                .andExpect(status().isUnprocessableEntity());             // ASSERT (status code is 422)
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
     }
 
 
@@ -178,12 +177,12 @@ public class mathControllerTest {
 
         // ACT
         mockMvc.perform(
-                        post("/multiply")                                // Perform the POST request.
-                                .content(inputJson)                               // Set the request body.
-                                .contentType(MediaType.APPLICATION_JSON)          // Tell the server it's in JSON format.
+                        post("/multiply")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andDo(print())                                           // Print results to console.
-                .andExpect(status().isUnprocessableEntity());             // ASSERT (status code is 422)
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
     }
 
 
@@ -228,12 +227,12 @@ public class mathControllerTest {
 
         // ACT
         mockMvc.perform(
-                        post("/divide")                                // Perform the POST request.
-                                .content(inputJson)                               // Set the request body.
-                                .contentType(MediaType.APPLICATION_JSON)          // Tell the server it's in JSON format.
+                        post("/divide")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andDo(print())                                           // Print results to console.
-                .andExpect(status().isUnprocessableEntity());             // ASSERT (status code is 422)
+                .andDo(print())
+                .andExpect(status().isUnprocessableEntity());
     }
 
     @Test
@@ -246,11 +245,11 @@ public class mathControllerTest {
 
         // ACT
         mockMvc.perform(
-                        post("/divide")                                    // Perform the POST request.
-                                .content(inputJson)                               // Set the request body.
-                                .contentType(MediaType.APPLICATION_JSON)          // Tell the server it's in JSON format.
+                        post("/divide")
+                                .content(inputJson)
+                                .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andDo(print())                                                     // Print results to console.
+                .andDo(print())
                 .andExpect(status().isUnprocessableEntity());
 
     }
