@@ -2,6 +2,7 @@ openapi: 3.0.1
 info:
   title: OpenAPI definition
   version: v0
+  description: MonthConverter  and Math solution endpoints
 servers:
   - url: http://localhost:8080
     description: Generated server url
@@ -18,8 +19,8 @@ paths:
               $ref: '#/components/schemas/MathSolution'
         required: true
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             '*/*':
               schema:
@@ -42,8 +43,8 @@ paths:
               $ref: '#/components/schemas/MathSolution'
         required: true
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             '*/*':
               schema:
@@ -66,8 +67,8 @@ paths:
               $ref: '#/components/schemas/MathSolution'
         required: true
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             '*/*':
               schema:
@@ -90,8 +91,8 @@ paths:
               $ref: '#/components/schemas/MathSolution'
         required: true
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created
           content:
             '*/*':
               schema:
@@ -161,6 +162,9 @@ components:
           type: string
           format: date-time
     MathSolution:
+      required:
+        - operand1
+        - operand2
       type: object
       properties:
         operand1:
@@ -180,4 +184,3 @@ components:
         number:
           type: integer
           format: int32
-
