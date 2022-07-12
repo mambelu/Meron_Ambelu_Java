@@ -40,10 +40,6 @@ public class mathControllerTest {
         // ARRANGE
         // ARRANGE
         MathSolution inputBody = new MathSolution("10","7");
-        inputBody.setOperation("add");
-        inputBody.setAnswer(17);
-
-
 
         // Convert Java Object to JSON.
         String inputJson = mapper.writeValueAsString(inputBody);
@@ -96,9 +92,7 @@ public class mathControllerTest {
 
         // ARRANGE
         // ARRANGE
-        MathSolution inputBody = new MathSolution();
-        inputBody.setOperand1("10");
-        inputBody.setOperand2("7");
+        MathSolution inputBody = new MathSolution("10","7");
 
         // Convert Java Object to JSON.
         String inputJson = mapper.writeValueAsString(inputBody);
@@ -148,9 +142,7 @@ public class mathControllerTest {
 
         // ARRANGE
         // ARRANGE
-        MathSolution inputBody = new MathSolution();
-        inputBody.setOperand1("10");
-        inputBody.setOperand2("7");
+        MathSolution inputBody = new MathSolution("10","7");
 
         // Convert Java Object to JSON.
         String inputJson = mapper.writeValueAsString(inputBody);
@@ -200,9 +192,7 @@ public class mathControllerTest {
 
         // ARRANGE
         // ARRANGE
-        MathSolution inputBody = new MathSolution();
-        inputBody.setOperand1("10");
-        inputBody.setOperand2("2");
+        MathSolution inputBody = new MathSolution("10","2");
 
         // Convert Java Object to JSON.
         String inputJson = mapper.writeValueAsString(inputBody);

@@ -1,16 +1,15 @@
 package com.company.M2ChallengeAmbeluMeron.controller;
 
 import com.company.M2ChallengeAmbeluMeron.model.MathSolution;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.NumberUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class mathController {
 
     @RequestMapping(value = "/add", method= RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
     public MathSolution addTwoOperands(@RequestBody MathSolution operands){
         MathSolution returnVal = new MathSolution();
         returnVal.setOperand1(operands.getOperand1());
@@ -25,6 +24,7 @@ public class mathController {
 
 
     @RequestMapping(value = "/subtract", method= RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
     public MathSolution subtractTwoOperands(@RequestBody MathSolution operands){
         MathSolution returnVal = new MathSolution();
         returnVal.setOperand1(operands.getOperand1());
@@ -36,6 +36,7 @@ public class mathController {
     }
 
     @RequestMapping(value = "/multiply", method= RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
     public MathSolution multiplyTwoOperands(@RequestBody MathSolution operands){
         MathSolution returnVal = new MathSolution();
         returnVal.setOperand1(operands.getOperand1());
@@ -48,6 +49,7 @@ public class mathController {
 
 
     @RequestMapping(value = "/divide", method= RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
     public MathSolution divideTwoOperands(@RequestBody MathSolution operands){
         MathSolution returnVal = new MathSolution();
         returnVal.setOperand1(operands.getOperand1());
