@@ -1,60 +1,60 @@
-package com.trilogyed.gamestoreinvoicing.repository;
-
-
-import com.trilogyed.gamestoreinvoicing.model.Invoice;
-import com.trilogyed.gamestoreinvoicing.model.ProcessingFee;
-import com.trilogyed.gamestoreinvoicing.model.Tax;
-import com.trilogyed.gamestoreinvoicing.viewModel.TShirtViewModel;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.Assert.*;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
-
-public class InvoiceRepositoryTest {
-
-    @Autowired
-    InvoiceRepository invoiceRepository;
-
-    @Autowired
-    TaxRepository taxRepository;
-    @Autowired
-    ProcessingFeeRepository processingFeeRepository;
-
-    @Before
-    public void setUp() throws Exception {
-
-
-        invoiceRepository.deleteAll();
-        processingFeeRepository.deleteAll();
-
-        ProcessingFee tShirtProcessingFee = new ProcessingFee();
-        tShirtProcessingFee.setProductType("T-Shirts");
-        tShirtProcessingFee.setFee(new BigDecimal("1.98"));
-
-        ProcessingFee consoleProcessingFee = new ProcessingFee();
-        consoleProcessingFee.setProductType("Consoles");
-        consoleProcessingFee.setFee(new BigDecimal("14.99"));
-
-        ProcessingFee gameProcessingFee = new ProcessingFee();
-        gameProcessingFee.setProductType("Games");
-        gameProcessingFee.setFee(new BigDecimal("1.49"));
-
-        processingFeeRepository.save(tShirtProcessingFee);
-        processingFeeRepository.save(consoleProcessingFee);
-        processingFeeRepository.save(gameProcessingFee);
-    }
-
+//package com.trilogyed.gamestoreinvoicing.repository;
+//
+//
+//import com.trilogyed.gamestoreinvoicing.model.Invoice;
+//import com.trilogyed.gamestoreinvoicing.model.ProcessingFee;
+//import com.trilogyed.gamestoreinvoicing.model.Tax;
+//import com.trilogyed.gamestoreinvoicing.viewModel.TShirtViewModel;
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+//
+//import java.math.BigDecimal;
+//import java.util.List;
+//import java.util.Optional;
+//
+//import static org.junit.Assert.*;
+//
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@SpringBootTest
+//
+//public class InvoiceRepositoryTest {
+//
+//    @Autowired
+//    InvoiceRepository invoiceRepository;
+//
+//    @Autowired
+//    TaxRepository taxRepository;
+//    @Autowired
+//    ProcessingFeeRepository processingFeeRepository;
+//
+//    @Before
+//    public void setUp() throws Exception {
+//
+//
+//        invoiceRepository.deleteAll();
+//        processingFeeRepository.deleteAll();
+//
+//        ProcessingFee tShirtProcessingFee = new ProcessingFee();
+//        tShirtProcessingFee.setProductType("T-Shirts");
+//        tShirtProcessingFee.setFee(new BigDecimal("1.98"));
+//
+//        ProcessingFee consoleProcessingFee = new ProcessingFee();
+//        consoleProcessingFee.setProductType("Consoles");
+//        consoleProcessingFee.setFee(new BigDecimal("14.99"));
+//
+//        ProcessingFee gameProcessingFee = new ProcessingFee();
+//        gameProcessingFee.setProductType("Games");
+//        gameProcessingFee.setFee(new BigDecimal("1.49"));
+//
+//        processingFeeRepository.save(tShirtProcessingFee);
+//        processingFeeRepository.save(consoleProcessingFee);
+//        processingFeeRepository.save(gameProcessingFee);
+//    }
+//
 //    @Test
 //    public void shouldAddFindDeleteInvoice() {
 //
@@ -114,7 +114,7 @@ public class InvoiceRepositoryTest {
 //        //Assert
 //        assertFalse(invoice2.isPresent());
 //    }
-
+//
 //    @Test
 //    public void shouldFindByName() {
 //
@@ -168,4 +168,4 @@ public class InvoiceRepositoryTest {
 //        //Assert
 //        assertEquals(foundNoinvoice.size(),0);
 //    }
-}
+//}

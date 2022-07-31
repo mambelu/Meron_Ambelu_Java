@@ -56,6 +56,14 @@ public class InvoiceService {
         return client.getConsole(consoleId);
     }
 
+    public List<ConsoleViewModel> getConsoleByManufacturer(@PathVariable("manufacturer") String manu){
+        return client.getConsoleByManufacturer(manu);
+    }
+
+    public List<ConsoleViewModel> getAllConsoles(){
+        return client.getAllConsoles();
+    }
+
 
     public GameViewModel getGame(long gameId) {
         return client.getGame(gameId);
@@ -72,9 +80,18 @@ public class InvoiceService {
     return client.getGamesByEsrbRating(esrb);
     }
 
+    public List<GameViewModel> getGamesByStudio(@PathVariable("studio") String studio){
+       return client.getGamesByStudio(studio);
+    }
+
+    public List<GameViewModel> getAllGames(){
+        return client.getAllGames();
+    }
 
 
-    public TShirtViewModel getTShirt( int tShirtId) {
+
+    public TShirtViewModel getTShirt( long tShirtId) {
+
         return client.getTShirt(tShirtId);
     }
 
@@ -82,6 +99,14 @@ public class InvoiceService {
     public List<TShirtViewModel> getTShirtsBySize( String size) {
 
         return client.getTShirtsBySize(size);
+    }
+
+    public List<TShirtViewModel> getTShirtsByColor( String color){
+        return  client.getTShirtsByColor(color);
+    }
+
+    public List<TShirtViewModel> getAllTShirts(){
+        return client.getAllTShirts();
     }
 
 

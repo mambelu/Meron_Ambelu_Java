@@ -3,6 +3,8 @@ package com.trilogyed.gamestoreinvoicing.controller;
 import com.trilogyed.gamestoreinvoicing.model.Invoice;
 import com.trilogyed.gamestoreinvoicing.service.InvoiceService;
 import com.trilogyed.gamestoreinvoicing.viewModel.ConsoleViewModel;
+import com.trilogyed.gamestoreinvoicing.viewModel.GameViewModel;
+import com.trilogyed.gamestoreinvoicing.viewModel.TShirtViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,47 +24,7 @@ public class InvoiceController {
     // are left out by design due to its potential danger. The getAllInvoices is a questionable one since it could
     // overwhelm the system and infringes on data privacy; however, it does not damage data as with the Update and Delete
 
-////    @PostMapping
-////    @ResponseStatus(HttpStatus.CREATED)
-////    public Invoice purchaseItem(@RequestBody @Valid Invoice Invoice) {
-////        Invoice = service.createInvoice(Invoice);
-////        return Invoice;
-////    }
-//
-//    @GetMapping("/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public Invoice findInvoice(@PathVariable("id") long invoiceId) {
-//        Invoice Invoice = service.getInvoice(invoiceId);
-//        if (Invoice == null) {
-//            throw new IllegalArgumentException("Invoice could not be retrieved for id " + invoiceId);
-//        } else {
-//            return Invoice;
-//        }
-//    }
-//
-//    @GetMapping()
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<Invoice> findAllInvoices() {
-//        List<Invoice> InvoiceList = service.getAllInvoices();
-//
-//        if (InvoiceList == null || InvoiceList.isEmpty()) {
-//            throw new IllegalArgumentException("No invoices were found.");
-//        } else {
-//            return InvoiceList;
-//        }
-//    }
-//
-//    @GetMapping("/cname/{name}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<Invoice> findInvoicesByCustomerName(@PathVariable String name) {
-//        List<Invoice> InvoiceList = service.getInvoicesByCustomerName(name);
-//
-//        if (InvoiceList == null || InvoiceList.isEmpty()) {
-//            throw new IllegalArgumentException("No invoices were found for: "+name);
-//        } else {
-//            return InvoiceList;
-//        }
-//    }
+
 
     @GetMapping("/console/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -75,11 +37,65 @@ public class InvoiceController {
         }
     }
 
+    @GetMapping("/manufacturer/{manufacturer}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ConsoleViewModel> getConsoleByManufacturer(@PathVariable("manufacturer") String manu){
+        return service.getConsoleByManufacturer(manu);
+    }
+
+
+
+
     @PostMapping("/purchaseInvoices")
     @ResponseStatus(HttpStatus.CREATED)
     public Invoice createPurchaseOrder(@RequestBody @Valid Invoice invoice) {
         return service.createInvoice(invoice);
     }
+
+    @GetMapping("tshirt/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public TShirtViewModel getTShirt(@PathVariable("id") long tShirtId){
+        return service.getTShirt(tShirtId);
+    }
+
+    @GetMapping("tshirt/size/{size}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<TShirtViewModel> getTShirtsBySize(@PathVariable("size") String size){
+        return service.getTShirtsBySize(size);
+    }
+
+    @GetMapping("game/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public GameViewModel getGame(@PathVariable("id") long gameId){
+        return service.getGame(gameId);
+    }
+
+    @GetMapping("/studio/{studio}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<GameViewModel> getGamesByStudio(@PathVariable("studio") String studio){
+       return service.getGamesByStudio(studio);
+    }
+
+    @GetMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public List<GameViewModel> getAllGames(){
+       return service.getAllGames();
+    }
+
+    @GetMapping("tshirt/color/{color}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<TShirtViewModel> getTShirtsByColor(@PathVariable("color") String color){
+        return service.getTShirtsByColor(color);
+    }
+
+    @GetMapping("/tshirt")
+    @ResponseStatus(HttpStatus.OK)
+    public List<TShirtViewModel> getShirts(){
+        return service.getAllTShirts();
+    }
+
+
+
 
 
 }
