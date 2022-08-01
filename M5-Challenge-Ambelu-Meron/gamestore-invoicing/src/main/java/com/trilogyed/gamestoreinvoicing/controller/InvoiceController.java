@@ -24,7 +24,33 @@ public class InvoiceController {
     // are left out by design due to its potential danger. The getAllInvoices is a questionable one since it could
     // overwhelm the system and infringes on data privacy; however, it does not damage data as with the Update and Delete
 
+    @GetMapping("/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Invoice> getInvoicesByCustomerName(@PathVariable String name){
+        return service.getInvoicesByCustomerName(name);
+    }
 
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<Invoice> getAllInvoices() {
+        return service.getAllInvoices();
+    }
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Invoice getInvoice(@PathVariable  long id){
+        return service.getInvoice(id);
+    }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Invoice saveInvoice(@RequestBody Invoice invoice){
+        return service.saveInvoice(invoice);
+    }
+
+    @PostMapping("/purchaseInvoices")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Invoice createPurchaseOrder(@RequestBody  Invoice invoice) {
+        return service.createInvoice(invoice);
+    }
 
     @GetMapping("/console/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -37,20 +63,21 @@ public class InvoiceController {
         }
     }
 
-    @GetMapping("/manufacturer/{manufacturer}")
+    @GetMapping("console/manufacturer/{manufacturer}")
     @ResponseStatus(HttpStatus.OK)
     public List<ConsoleViewModel> getConsoleByManufacturer(@PathVariable("manufacturer") String manu){
         return service.getConsoleByManufacturer(manu);
     }
 
-
-
-
-    @PostMapping("/purchaseInvoices")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Invoice createPurchaseOrder(@RequestBody @Valid Invoice invoice) {
-        return service.createInvoice(invoice);
+    @GetMapping("/console")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ConsoleViewModel> getAllConsoles(){
+        return service.getAllConsoles();
     }
+
+
+
+
 
     @GetMapping("tshirt/{id}")
     @ResponseStatus(HttpStatus.OK)
@@ -76,7 +103,19 @@ public class InvoiceController {
        return service.getGamesByStudio(studio);
     }
 
-    @GetMapping()
+    @GetMapping("/title/{title}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<GameViewModel> getGamesByTitle(@PathVariable("title") String title){
+        return service.getGamesByTitle(title);
+    }
+
+    @GetMapping("/esrbrating/{esrb}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<GameViewModel> getGamesByEsrbRating(@PathVariable("esrb") String esrb){
+        return service.getGamesByEsrbRating(esrb);
+    }
+
+    @GetMapping("/game")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getAllGames(){
        return service.getAllGames();
@@ -93,6 +132,8 @@ public class InvoiceController {
     public List<TShirtViewModel> getShirts(){
         return service.getAllTShirts();
     }
+
+
 
 
 

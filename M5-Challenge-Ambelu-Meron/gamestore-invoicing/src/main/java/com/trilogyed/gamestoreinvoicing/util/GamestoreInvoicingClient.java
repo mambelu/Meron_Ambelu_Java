@@ -30,7 +30,7 @@ public interface GamestoreInvoicingClient {
     public ConsoleViewModel getConsole(@PathVariable("id") long consoleId);
 
 
-    @GetMapping("/manufacturer/{manufacturer}")
+    @GetMapping("console/manufacturer/{manufacturer}")
     @ResponseStatus(HttpStatus.OK)
     public List<ConsoleViewModel> getConsoleByManufacturer(@PathVariable("manufacturer") String manu);
 

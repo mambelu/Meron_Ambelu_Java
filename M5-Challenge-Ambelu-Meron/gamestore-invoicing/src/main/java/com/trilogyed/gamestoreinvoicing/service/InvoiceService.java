@@ -303,6 +303,10 @@ public class InvoiceService {
             return buildInvoice(invoice);
         }
 
+        public Invoice saveInvoice(Invoice invoice){
+        return invoiceRepo.save(invoice);
+        }
+
 
 
 

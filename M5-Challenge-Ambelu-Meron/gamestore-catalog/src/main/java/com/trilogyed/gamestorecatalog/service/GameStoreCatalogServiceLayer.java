@@ -71,6 +71,9 @@ public class GameStoreCatalogServiceLayer {
             if (gameViewModel == null)
                 throw new IllegalArgumentException("No Game data is passed! Game object is null!");
 
+
+
+
             //make sure the game exists. and if not, throw exception...
             if (this.getGame(gameViewModel.getId()) == null)
                 throw new IllegalArgumentException("No such game to update.");
@@ -169,9 +172,15 @@ public class GameStoreCatalogServiceLayer {
             if (consoleViewModel == null)
                 throw new IllegalArgumentException("No console data is passed! Console object is null!");
 
+
+
             //make sure the Console exists. and if not, throw exception...
             if (this.getConsoleById(consoleViewModel.getId()) == null)
                 throw new IllegalArgumentException("No such console to update.");
+
+            if (this.getConsoleById(consoleViewModel.getId()) == null)
+                throw new IllegalArgumentException("No such console to update.");
+
 
             Console console = new Console();
             console.setId(consoleViewModel.getId());
