@@ -24,7 +24,7 @@ public class InvoiceController {
     // are left out by design due to its potential danger. The getAllInvoices is a questionable one since it could
     // overwhelm the system and infringes on data privacy; however, it does not damage data as with the Update and Delete
 
-    @GetMapping("/{name}")
+    @GetMapping("name/{name}")
     @ResponseStatus(HttpStatus.OK)
     public List<Invoice> getInvoicesByCustomerName(@PathVariable String name){
         return service.getInvoicesByCustomerName(name);
@@ -54,10 +54,10 @@ public class InvoiceController {
 
     @GetMapping("/console/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ConsoleViewModel getConsole(@PathVariable("id") long consoleId) {
-        ConsoleViewModel consoleViewModel = service.getConsoleById(consoleId);
+    public ConsoleViewModel getConsole(@PathVariable long id) {
+        ConsoleViewModel consoleViewModel = service.getConsole(id);
         if (consoleViewModel == null) {
-            throw new IllegalArgumentException("Console could not be retrieved for id " + consoleId);
+            throw new IllegalArgumentException("Console could not be retrieved for id " + id);
         } else {
             return consoleViewModel;
         }
@@ -97,19 +97,19 @@ public class InvoiceController {
         return service.getGame(gameId);
     }
 
-    @GetMapping("/studio/{studio}")
+    @GetMapping("game/studio/{studio}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getGamesByStudio(@PathVariable("studio") String studio){
        return service.getGamesByStudio(studio);
     }
 
-    @GetMapping("/title/{title}")
+    @GetMapping("game/title/{title}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getGamesByTitle(@PathVariable("title") String title){
         return service.getGamesByTitle(title);
     }
 
-    @GetMapping("/esrbrating/{esrb}")
+    @GetMapping("game/esrbrating/{esrb}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getGamesByEsrbRating(@PathVariable("esrb") String esrb){
         return service.getGamesByEsrbRating(esrb);
@@ -134,6 +134,11 @@ public class InvoiceController {
     }
 
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteInvoiceById(long id){
+        service.deleteInvoiceById(id);
+    }
 
 
 

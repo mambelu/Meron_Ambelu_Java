@@ -10,6 +10,7 @@ import java.util.Objects;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "invoice")
+
 public class Invoice {
 
     @Id
@@ -31,7 +32,7 @@ public class Invoice {
     private BigDecimal total;
 
 
-    public Invoice(String name, String street, String city, String state, String zipcode, String itemType, long itemId, BigDecimal unitPrice, long quantity) {
+    public Invoice(String name, String street, String city, String state, String zipcode, String itemType, long itemId, long quantity) {
         this.name = name;
         this.street = street;
         this.city = city;
@@ -39,7 +40,6 @@ public class Invoice {
         this.zipcode = zipcode;
         this.itemType = itemType;
         this.itemId = itemId;
-        this.unitPrice = unitPrice;
         this.quantity = quantity;
     }
 
@@ -113,7 +113,8 @@ public class Invoice {
     }
 
     public BigDecimal getUnitPrice() {
-        return unitPrice.setScale(2, RoundingMode.HALF_UP);
+
+        return unitPrice;
     }
 
     public void setUnitPrice(BigDecimal unitPrice) {
@@ -129,15 +130,17 @@ public class Invoice {
     }
 
     public BigDecimal getSubtotal() {
-        return subtotal.setScale(2, RoundingMode.HALF_UP);
+        return subtotal;
     }
 
     public void setSubtotal(BigDecimal subtotal) {
+
         this.subtotal = subtotal.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getTax() {
-        return tax.setScale(2, RoundingMode.HALF_UP);
+
+        return tax;
     }
 
     public void setTax(BigDecimal tax) {
@@ -145,7 +148,8 @@ public class Invoice {
     }
 
     public BigDecimal getProcessingFee() {
-        return processingFee.setScale(2, RoundingMode.HALF_UP);
+
+        return processingFee;
     }
 
     public void setProcessingFee(BigDecimal processingFee) {
@@ -153,7 +157,8 @@ public class Invoice {
     }
 
     public BigDecimal getTotal() {
-        return total.setScale(2, RoundingMode.HALF_UP);
+
+        return total;
     }
 
     public void setTotal(BigDecimal total) {

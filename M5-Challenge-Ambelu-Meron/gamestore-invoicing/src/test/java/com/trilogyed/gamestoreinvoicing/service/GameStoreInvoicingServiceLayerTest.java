@@ -1,14 +1,16 @@
 package com.trilogyed.gamestoreinvoicing.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.trilogyed.gamestoreinvoicing.model.Invoice;
 import com.trilogyed.gamestoreinvoicing.model.ProcessingFee;
 import com.trilogyed.gamestoreinvoicing.model.Tax;
 import com.trilogyed.gamestoreinvoicing.repository.InvoiceRepository;
 import com.trilogyed.gamestoreinvoicing.repository.ProcessingFeeRepository;
 import com.trilogyed.gamestoreinvoicing.repository.TaxRepository;
+
+
+import com.trilogyed.gamestoreinvoicing.util.GamestoreInvoicingClient;
 import com.trilogyed.gamestoreinvoicing.viewModel.TShirtViewModel;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +30,9 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
+
+
+@SpringBootTest
 @RunWith(SpringRunner.class)
 public class GameStoreInvoicingServiceLayerTest {
 
@@ -36,30 +41,28 @@ public class GameStoreInvoicingServiceLayerTest {
     private ProcessingFeeRepository processingFeeRepository;
     private TaxRepository taxRepository;
 
-    @Autowired
+    GamestoreInvoicingClient client;
 
+    @Autowired
+    private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
 
-
-
+    @Before
+    public void setUpMock() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    }
+    @MockBean
+    InvoiceService service;
 
     @Before
     public void setUp() throws Exception {
-
         setUpInvoiceRepositoryMock();
         setUpProcessingFeeRepositoryMock();
         setUpTaxRepositoryMock();
 
-
-
-        service = new InvoiceService(invoiceRepository, taxRepository, processingFeeRepository);
+        service = new InvoiceService(invoiceRepository, taxRepository, processingFeeRepository, client);
     }
 
-    @MockBean
-    InvoiceService service;
-
-
-    //Testing Invoice Operations...
     @Test
     public void setUpInvoiceRepositoryMock() {
         invoiceRepository = mock(InvoiceRepository.class);
@@ -74,10 +77,10 @@ public class GameStoreInvoicingServiceLayerTest {
         invoice.setItemId(54);
         invoice.setUnitPrice(new BigDecimal("19.99"));
         invoice.setQuantity(2);
-        invoice.setSubtotal(new BigDecimal("39.98"));
-        invoice.setTax(new BigDecimal("2"));
-        invoice.setProcessingFee(new BigDecimal("1.98"));
-        invoice.setTotal(new BigDecimal("43.96"));
+//        invoice.setSubtotal(new BigDecimal("39.98"));
+//        invoice.setTax(new BigDecimal("2"));
+//        invoice.setProcessingFee(new BigDecimal("1.98"));
+//        invoice.setTotal(new BigDecimal("43.96"));
 
         Invoice invoice1 = new Invoice();
         invoice1.setId(20);
@@ -155,6 +158,47 @@ public class GameStoreInvoicingServiceLayerTest {
         doReturn(allList).when(invoiceRepository).findAll();
     }
 
+    @Test
+    public void createAndFindInvoice() {
+
+        Invoice invoice = new Invoice();
+        invoice.setId(1);
+        invoice.setName("James Brown");
+        invoice.setCity("New Haven");
+        invoice.setState("CT");
+        invoice.setZipcode("11111");
+        invoice.setItemType("Games");
+        invoice.setItemId(1);
+        invoice.setQuantity(1);
+        invoice.setUnitPrice(new BigDecimal("99.99"));
+        invoice.setSubtotal(new BigDecimal("99.99"));
+        invoice.setTax(new BigDecimal("2.99"));
+        invoice.setProcessingFee(new BigDecimal("1.98"));
+        invoice.setTotal(new BigDecimal("104.97"));
+
+        Invoice invoice2 = new Invoice();
+        invoice.setName("James Brown");
+        invoice.setCity("New Haven");
+        invoice.setState("CT");
+        invoice.setZipcode("11111");
+        invoice.setItemType("Games");
+        invoice.setItemId(1);
+        invoice.setQuantity(1);
+        invoice.setUnitPrice(new
+
+                BigDecimal("99.99"));
+
+        List<Invoice> invoiceList = new ArrayList<>();
+        invoiceList.add(invoice);
+
+
+        doReturn(invoice).when(invoiceRepository).save(invoice2);
+        doReturn(Optional.of(invoice)).when(invoiceRepository).findById(new Long(1));
+        doReturn(invoiceList).when(invoiceRepository).findAll();
+
+    }
+
+    //Testing Invoice Operations...
 
     @Test
     public void shouldFindAllInvoices(){
@@ -216,89 +260,93 @@ public class GameStoreInvoicingServiceLayerTest {
         assertEquals(currInvoices.size(), foundAllInvoices.size());
     }
 
-
-    @Test(expected = IllegalArgumentException.class)
-    public void shouldFailCreateFindInvoiceWithBadState() {
-        TShirtViewModel tShirt = new TShirtViewModel();
-        tShirt.setId(99);
-        tShirt.setSize("Small");
-        tShirt.setColor("Red");
-        tShirt.setDescription("sleeveless");
-        tShirt.setPrice(new BigDecimal("400"));
-        tShirt.setQuantity(30);
-
-        Invoice invoiceViewModel = new Invoice();
-        invoiceViewModel.setName("John Jake");
-        invoiceViewModel.setStreet("street");
-        invoiceViewModel.setCity("Charlotte");
-        invoiceViewModel.setState("NY");
-        invoiceViewModel.setZipcode("83749");
-        invoiceViewModel.setItemType("T-Shirt");
-        invoiceViewModel.setItemId(99);
-        invoiceViewModel.setQuantity(2);
-
-        invoiceViewModel = service.createInvoice(invoiceViewModel);
-
-        Invoice ivmfromService = service.getInvoice(invoiceViewModel.getId());
-
-        assertEquals(invoiceViewModel, ivmfromService);
-    }
-
     @Test(expected = IllegalArgumentException.class)
     public void shouldFailCreateFindInvoiceWithBadItemType() {
-        TShirtViewModel tShirt = new TShirtViewModel();
-        tShirt.setSize("Medium");
-        tShirt.setColor("Blue");
-        tShirt.setDescription("V-Neck");
-        tShirt.setPrice(new BigDecimal("19.99"));
-        tShirt.setQuantity(5);
-       // tShirt = service.createTShirt(tShirt);
 
-        Invoice invoiceViewModel = new Invoice();
-        invoiceViewModel.setName("John Jake");
-        invoiceViewModel.setStreet("street");
-        invoiceViewModel.setCity("Charlotte");
-        invoiceViewModel.setState("NC");
-        invoiceViewModel.setZipcode("83749");
-        invoiceViewModel.setItemType("Bad Item Type");
-        invoiceViewModel.setItemId(54);
-        invoiceViewModel.setQuantity(2);
+        Invoice invoice = new Invoice();
+        invoice.setName("John Jake");
+        invoice.setStreet("street");
+        invoice.setCity("Charlotte");
+        invoice.setState("NC");
+        invoice.setZipcode("83749");
+        invoice.setItemType("Bad Item Type");
+        invoice.setItemId(54);
+        invoice.setQuantity(2);
 
-        invoiceViewModel = service.createInvoice(invoiceViewModel);
+        invoice = service.createInvoice(invoice);
 
-        Invoice ivmfromService = service.getInvoice(invoiceViewModel.getId());
+        Invoice ivmfromService = service.getInvoice(invoice.getId());
 
-        assertEquals(invoiceViewModel, ivmfromService);
+        assertEquals(invoice, ivmfromService);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldFailCreateFindInvoiceWithNoInventory() {
+
+        Invoice invoice = new Invoice();
+        invoice.setName("John Jake");
+        invoice.setStreet("street");
+        invoice.setCity("Charlotte");
+        invoice.setState("NC");
+        invoice.setZipcode("83749");
+        invoice.setItemType("T-Shirt");
+        invoice.setItemId(54);
+        invoice.setQuantity(0);
+
+        invoice = service.createInvoice(invoice);
+
+        Invoice ivmfromService = service.getInvoice(invoice.getId());
+
+        assertEquals(invoice, ivmfromService);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldFailWhenCreateInvoiceInvalidItem() {
+
+        Invoice invoice = new Invoice();
+        invoice.setName("John Jake");
+        invoice.setStreet("street");
+        invoice.setCity("Charlotte");
+        invoice.setState("NC");
+        invoice.setZipcode("83749");
+        invoice.setItemType("nothing");
+        invoice.setItemId(54);
+        invoice.setQuantity(2);
+
+        invoice = service.createInvoice(invoice);
+
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldFailWhenCreateInvoiceInvalidQuantity() {
+
+        Invoice invoice = new Invoice();
+        invoice.setName("John Jake");
+        invoice.setStreet("street");
+        invoice.setCity("Charlotte");
+        invoice.setState("NC");
+        invoice.setZipcode("83749");
+        invoice.setItemType("T-Shirt");
+        invoice.setItemId(54);
+        invoice.setQuantity(0);
+
+        invoice = service.createInvoice(invoice);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void shouldFailWhenCreateInvoiceInvalidInvoiceMV() {
         TShirtViewModel tShirt = new TShirtViewModel();
         tShirt.setSize("Medium");
         tShirt.setColor("Blue");
         tShirt.setDescription("V-Neck");
         tShirt.setPrice(new BigDecimal("19.99"));
         tShirt.setQuantity(5);
-        //tShirt = service.createTShirt(tShirt);
+        tShirt = service.createTShirt(tShirt);
 
-        Invoice invoiceViewModel = new Invoice();
-        invoiceViewModel.setName("John Jake");
-        invoiceViewModel.setStreet("street");
-        invoiceViewModel.setCity("Charlotte");
-        invoiceViewModel.setState("NC");
-        invoiceViewModel.setZipcode("83749");
-        invoiceViewModel.setItemType("T-Shirt");
-        invoiceViewModel.setItemId(54);
-        invoiceViewModel.setQuantity(6);
+        Invoice invoice = null;
 
-        invoiceViewModel = service.createInvoice(invoiceViewModel);
-
-        Invoice ivmfromService = service.getInvoice(invoiceViewModel.getId());
-
-        assertEquals(invoiceViewModel, ivmfromService);
+        invoice = service.createInvoice(invoice);
     }
-
-
 
 
 
@@ -329,7 +377,5 @@ public class GameStoreInvoicingServiceLayerTest {
         doReturn(Optional.of(taxNY)).when(taxRepository).findById("NY");
 
     }
-
-
 
 }

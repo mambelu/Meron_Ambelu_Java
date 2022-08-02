@@ -39,24 +39,25 @@ public class InvoiceService {
     ProcessingFeeRepository processingFeeRepo;
 
 
-    @Autowired
+    //@Autowired
     private GamestoreInvoicingClient client;
 
     @Autowired
-    public InvoiceService(InvoiceRepository invoiceRepo, TaxRepository taxRepo, ProcessingFeeRepository processingFeeRepo) {
+    public InvoiceService(InvoiceRepository invoiceRepo, TaxRepository taxRepo, ProcessingFeeRepository processingFeeRepo,GamestoreInvoicingClient client) {
 
         this.invoiceRepo = invoiceRepo;
         this.taxRepo = taxRepo;
         this.processingFeeRepo = processingFeeRepo;
+        this. client= client;
     }
 
 
-    public ConsoleViewModel getConsoleById(long consoleId) {
+    public ConsoleViewModel getConsole(long consoleId) {
 
         return client.getConsole(consoleId);
     }
 
-    public List<ConsoleViewModel> getConsoleByManufacturer(@PathVariable("manufacturer") String manu){
+    public List<ConsoleViewModel> getConsoleByManufacturer(String manu){
         return client.getConsoleByManufacturer(manu);
     }
 
@@ -80,7 +81,7 @@ public class InvoiceService {
     return client.getGamesByEsrbRating(esrb);
     }
 
-    public List<GameViewModel> getGamesByStudio(@PathVariable("studio") String studio){
+    public List<GameViewModel> getGamesByStudio( String studio){
        return client.getGamesByStudio(studio);
     }
 
@@ -212,6 +213,9 @@ public class InvoiceService {
             }
 
             invoice.setUnitPrice(tempCon.getPrice());
+            tempCon.setQuantity(tempCon.getQuantity()-invoice.getQuantity());
+            client.updateConsole(tempCon);
+
 
         }  else if (invoice.getItemType().equals(GAME_ITEM_TYPE)) {
             GameViewModel tempGame = null;
@@ -227,6 +231,9 @@ public class InvoiceService {
                 throw new IllegalArgumentException("Requested quantity is unavailable.");
             }
             invoice.setUnitPrice(tempGame.getPrice());
+            tempGame.setQuantity(tempGame.getQuantity()-invoice.getQuantity());
+            client.updateGame(tempGame);
+
 
         } else if (invoice.getItemType().equals(TSHIRT_ITEM_TYPE)) {
             TShirtViewModel tempTShirt = null;
@@ -242,6 +249,8 @@ public class InvoiceService {
                 throw new IllegalArgumentException("Requested quantity is unavailable.");
             }
             invoice.setUnitPrice(tempTShirt.getPrice());
+            tempTShirt.setQuantity(tempTShirt.getQuantity()-invoice.getQuantity());
+            client.updateTShirt(tempTShirt);
 
         }else
             {
@@ -250,6 +259,10 @@ public class InvoiceService {
             }
 
             invoice.setQuantity(input.getQuantity());
+
+
+
+
 
             invoice.setSubtotal(
                     invoice.getUnitPrice().multiply(
@@ -300,12 +313,44 @@ public class InvoiceService {
 
             invoice = invoiceRepo.save(invoice);
 
+
+
+
             return buildInvoice(invoice);
         }
 
         public Invoice saveInvoice(Invoice invoice){
-        return invoiceRepo.save(invoice);
+        if(invoice == null){
+            return null;
         }
+                return invoiceRepo.save(invoice);
+        }
+    public void deleteInvoiceById(long id){
+        if(invoiceRepo.findById(id) == null){
+            throw new IllegalArgumentException("Unavailable invoice");
+        }
+        invoiceRepo.deleteById(id);
+
+    }
+
+
+    public void updateConsole(@RequestBody @Valid ConsoleViewModel consoleViewModel){
+        client.updateConsole(consoleViewModel);
+    }
+
+    public void updateGame(@RequestBody @Valid GameViewModel gameViewModel){
+        client.updateGame(gameViewModel);
+    }
+
+    public void updateTShirt(@RequestBody @Valid TShirtViewModel tShirtViewModel){
+        client.updateTShirt(tShirtViewModel);
+    }
+
+    public TShirtViewModel createTShirt(@RequestBody @Valid TShirtViewModel tShirtViewModel){
+        return client.createTShirt(tShirtViewModel);
+    }
+
+
 
 
 

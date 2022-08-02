@@ -14,27 +14,17 @@ import java.util.List;
 @FeignClient(name = "gameStore-catalog")
 public interface GamestoreInvoicingClient {
 
-    //    @RequestMapping(value = "/game", method = RequestMethod.GET)
-//    public String getGames();
-//
-//    @RequestMapping(method = RequestMethod.GET, value = "/game")
-//    List<Game> getStores();
-//
-//    @RequestMapping(method = RequestMethod.POST, value = "/game/{gameId}", consumes = "application/json")
-//    Game update(@PathVariable("gameId") Long storeId, Game game);
-//
-//    @RequestMapping(method = RequestMethod.DELETE, value = "/game/{gameId}")
-//    void delete(@PathVariable Long gameId);
+
     @GetMapping("/console/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ConsoleViewModel getConsole(@PathVariable("id") long consoleId);
+    public ConsoleViewModel getConsole(@PathVariable long id);
 
 
     @GetMapping("console/manufacturer/{manufacturer}")
     @ResponseStatus(HttpStatus.OK)
     public List<ConsoleViewModel> getConsoleByManufacturer(@PathVariable("manufacturer") String manu);
 
-    @GetMapping()
+    @GetMapping("/console")
     @ResponseStatus(HttpStatus.OK)
     public List<ConsoleViewModel> getAllConsoles();
 
@@ -47,18 +37,18 @@ public interface GamestoreInvoicingClient {
 
 
 
-    @GetMapping("/title/{title}")
+    @GetMapping("game/title/{title}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getGamesByTitle(@PathVariable("title") String title);
 
-    @GetMapping("/esrbrating/{esrb}")
+    @GetMapping("game/esrbrating/{esrb}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getGamesByEsrbRating(@PathVariable("esrb") String esrb);
 
-    @GetMapping("/studio/{studio}")
+    @GetMapping("game/studio/{studio}")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getGamesByStudio(@PathVariable("studio") String studio);
-    @GetMapping()
+    @GetMapping("/game")
     @ResponseStatus(HttpStatus.OK)
     public List<GameViewModel> getAllGames();
 
@@ -78,5 +68,26 @@ public interface GamestoreInvoicingClient {
     @GetMapping("/tshirt")
     @ResponseStatus(HttpStatus.OK)
     public List<TShirtViewModel> getAllTShirts();
+
+    @PutMapping("console")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateConsole(@RequestBody @Valid ConsoleViewModel consoleViewModel);
+
+    @PutMapping("game")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateGame(@RequestBody @Valid GameViewModel gameViewModel);
+
+    @PutMapping("tshirt")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateTShirt(@RequestBody @Valid TShirtViewModel tShirtViewModel);
+
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TShirtViewModel createTShirt(@RequestBody @Valid TShirtViewModel tShirtViewModel);
+
+
+
+
 
 }
