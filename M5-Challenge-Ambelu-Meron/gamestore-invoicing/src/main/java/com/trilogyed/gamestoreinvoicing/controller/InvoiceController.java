@@ -20,10 +20,6 @@ public class InvoiceController {
     @Autowired
     InvoiceService service;
 
-    // Assumption: All orders are final and data privacy is not top priority. Therefore, the Update & Delete EndPoints
-    // are left out by design due to its potential danger. The getAllInvoices is a questionable one since it could
-    // overwhelm the system and infringes on data privacy; however, it does not damage data as with the Update and Delete
-
     @GetMapping("name/{name}")
     @ResponseStatus(HttpStatus.OK)
     public List<Invoice> getInvoicesByCustomerName(@PathVariable String name){
@@ -48,7 +44,7 @@ public class InvoiceController {
 
     @PostMapping("/purchaseInvoices")
     @ResponseStatus(HttpStatus.CREATED)
-    public Invoice createPurchaseOrder(@RequestBody  Invoice invoice) {
+    public Invoice createInvoice(@RequestBody  Invoice invoice) {
         return service.createInvoice(invoice);
     }
 
@@ -74,9 +70,6 @@ public class InvoiceController {
     public List<ConsoleViewModel> getAllConsoles(){
         return service.getAllConsoles();
     }
-
-
-
 
 
     @GetMapping("tshirt/{id}")
@@ -139,9 +132,6 @@ public class InvoiceController {
     public void deleteInvoiceById(long id){
         service.deleteInvoiceById(id);
     }
-
-
-
 
 
 }

@@ -64,6 +64,7 @@ public class InvoiceControllerTest {
         inInvoice.setUnitPrice(new BigDecimal("12.50"));//pretending item exists with this price...
         inInvoice.setQuantity(2);
 
+
         Invoice savedInvoice = new Invoice();
         savedInvoice.setName("Joe Black");
         savedInvoice.setStreet("123 Main St");
@@ -82,17 +83,19 @@ public class InvoiceControllerTest {
 
         inputJson = mapper.writeValueAsString(inInvoice);
         outputJson = mapper.writeValueAsString(savedInvoice);
+        System.out.println(inputJson);
+        System.out.println(outputJson);
 
         //Mock call to service layer...
         when(storeServiceLayer.createInvoice(inInvoice)).thenReturn(savedInvoice);
 
         //Act & Assert
-        this.mockMvc.perform(post("/invoice")
+        this.mockMvc.perform(post("/invoice/purchaseInvoices")
                         .content(inputJson)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isCreated())
-                .andExpect(content().json(outputJson));
+                        .andDo(print())
+                        .andExpect(status().isCreated())
+                        .andExpect(content().json(outputJson));
     }
 
     @Test
