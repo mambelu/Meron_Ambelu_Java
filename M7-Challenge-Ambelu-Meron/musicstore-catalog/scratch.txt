@@ -1,0 +1,11 @@
+mysql://pmz2q0jdid5h9eil:sxo8o0gqjfphib3s@y6aj3qju8efqj0w1.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/tiy3ohdfik86j26l
+
+
+SPRING_DATASOURCE_URL =jdbc:mysql://y6aj3qju8efqj0w1.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/tiy3ohdfik86j26l
+SPRING_DATASOURCE_USERNAME = pmz2q0jdid5h9eil
+SPRING_DATASOURCE_PASSWORD = sxo8o0gqjfphib3s
+
+
+mysql://f5jzttwm4zw54kd3:q8amdcglt0duktgk@t07cxyau6qg7o5nz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/gurhyv1k9jrtvauu
+
+https://musicstoremerona.herokuapp.com
